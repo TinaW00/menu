@@ -1,0 +1,723 @@
+
+<template>
+<!--
+  <div style="height:1080px">
+    <v-toolbar flat dense>
+        <v-icon>mdi-vector-combine</v-icon>
+        <v-spacer></v-spacer>
+        <v-img src="http://210.3.65.166/pgsfm3k/template/swivel2.png" max-height="60" max-width="150" contain></v-img>
+        <v-spacer></v-spacer>
+
+        <v-col>
+          <v-menu :offset-y="100" open-on-click close-on-content-click >
+            <template v-slot:activator="{ on }">
+              <v-btn color="grey darken-3" text v-on="on">
+                User <v-icon right>mdi-chevron-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
+                <v-list-item-title>
+                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          </v-col>
+          <v-col>
+          <v-menu :offset-y="100" open-on-click close-on-content-click >
+            <template v-slot:activator="{ on }">
+              <v-btn color="grey darken-3" text v-on="on">
+                Menu <v-icon right>mdi-chevron-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
+                <v-list-item-title>
+                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-col>
+        <v-col>
+          <v-menu :offset-y="100" open-on-click close-on-content-click >
+            <template v-slot:activator="{ on }">
+              <v-btn color="grey darken-3" text v-on="on">
+                Role <v-icon right>mdi-chevron-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
+                <v-list-item-title>
+                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-col>
+
+        <v-col  cols="auto">
+          <div id="select">
+            <v-select :items="options" flat hide-details prefix="USER"  append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            </v-select>
+          </div>
+        </v-col>
+        <v-col  cols="auto">
+          <div id="select">
+            <v-select class="selectinput" :items="options" flat hide-details  append-icon="mdi-chevron-down" label="USER"  cols="auto" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            </v-select>
+          </div>
+        </v-col>
+
+        <v-spacer></v-spacer>
+
+       <v-row>
+        <v-col class="searchbar">
+          <v-text-field solo flat dense hide-details label="Search" append-icon="mdi-magnify" background-color="#f1f1f1" ></v-text-field>
+        </v-col>
+        </v-row>
+        <v-col>
+        <v-btn depressed outlined>
+        Component<v-icon right>mdi-chevron-down</v-icon>
+        </v-btn>
+        </v-col>
+        <v-spacer></v-spacer>
+        
+        
+        <v-btn icon>
+          <v-icon>mdi-history</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>mdi-cog-outline</v-icon>
+        </v-btn>
+
+        <v-menu :offset-y="100" open-on-click close-on-content-click >
+          <template v-slot:activator="{ on }">
+            <v-btn color="grey darken-1" text v-on="on">
+                <v-icon>mdi-translate</v-icon><v-icon right>mdi-chevron-down</v-icon>
+            </v-btn>
+          </template>
+          <v-list dense nav>
+            <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
+              <v-list-item-title>
+                <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-spacer></v-spacer>
+
+        <v-menu :offset-y="100" open-on-click close-on-content-click >
+          <template v-slot:activator="{ on }">
+            <v-btn color="grey darken-1" text v-on="on">
+                <v-icon left>mdi-circle-half-full</v-icon>Theme
+            </v-btn>
+          </template>
+          <v-list dense nav>
+            <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
+              <v-list-item-title>
+                <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+    </v-toolbar>
+    <v-divider></v-divider>
+
+      <div id="select">
+        <v-select :items="options" flat hide-details append-icon="mdi-chevron-down" label="user" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+      </v-select>
+  </div>
+-->
+
+
+<div>
+      
+
+
+ <v-toolbar flat dense style="z-index: 99;">                     <!-- Tool bar  -->
+        <v-btn icon  class="menu-btn" @click.stop="drawer = !drawer, MenuTabIndex = 1" :ripple="false" v-ripple="false"><v-icon  large>mdi-text-short</v-icon></v-btn>          <!-- Home button  -->
+        
+        <v-col cols="auto">        
+          <div id="select">
+            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-view-dashboard" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            </v-select>
+          </div>
+        </v-col>
+        <v-divider vertical></v-divider>
+        <v-spacer></v-spacer>
+
+        <v-img src="http://210.3.65.166/pgsfm3k/template/swivel2.png" max-height="60" max-width="120" contain></v-img>        <!-- LOGO  -->
+        <v-spacer></v-spacer>
+
+    <v-row style="display:flex;justify-content: space-around;">
+        <v-col cols="auto">      <!-- tenants  -->
+          <div id="select" class="tenantstitleAct">
+            <v-select class="selectinput" :items="tenants" item-text="tenant" item-value="tenant" flat hide-details label="Tenant" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+               <template v-slot:prepend-item></template>
+                    <template v-slot:selection="data">
+                        <v-list-item-avatar  style="height:24px;width:24px;min-width: 24px;margin:0px;">
+                            <v-img src="https://picsum.photos/id/11/500/300"></v-img>
+                            <span ></span>
+                        </v-list-item-avatar>
+                        <v-list-item-action-text class="pl-2">
+                            <v-list-item-title v-html="data.item.tenant"></v-list-item-title>
+                        </v-list-item-action-text>
+                    </template>
+                    <template v-slot:item="data">
+                        <v-list-item-avatar  style="height:35px;width:35px;min-width: 35px;margin:5px 10px 5px 0px;">
+                            <v-img  src="https://picsum.photos/id/11/500/300"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-action-text>
+                            <v-list-item-title v-html="data.item.tenant" ></v-list-item-title>
+                        </v-list-item-action-text>
+                    </template>
+
+            </v-select>
+          </div>
+        </v-col>
+        <v-col cols="auto">         <!-- User -->
+          <div id="select">
+            <v-select :items="options" flat hide-details prefix="User" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            </v-select>
+          </div>
+        </v-col>
+        <v-col cols="auto" >        <!-- Menu -->
+          <div id="select">
+            <v-select class="selectinput" :items="options" flat hide-details hide-selected append-icon="mdi-chevron-down" label="Menu" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            </v-select>
+          </div>
+        </v-col>
+        <v-col cols="auto" >        <!-- Role -->
+          <div id="select">
+            <v-select class="selectinput" :items="options" item-color="grey darken-1" small-chips deletable-chips flat hide-details prefix="Role" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+              <template #selection="{ item }">
+                <v-chip outlined color="#2660A4" style="max-height:27px">{{item.text}}</v-chip>
+              </template>
+            </v-select>
+          </div>
+        </v-col>
+    </v-row>
+        <v-spacer></v-spacer>
+
+       <v-row>
+        <v-col class="searchbar">            <!-- Search Bar -->
+          <v-text-field solo flat dense hide-details label="Search" append-icon="mdi-magnify" background-color="#f1f1f1" ></v-text-field>
+        </v-col>
+        </v-row>
+        <v-spacer></v-spacer>
+        
+        <v-btn icon>
+          <v-icon>mdi-history</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>mdi-cog-outline</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>mdi-palette-outline</v-icon>
+        </v-btn>
+        <v-menu :offset-y="100" open-on-click close-on-content-click >           <!-- Translate button -->
+          <template v-slot:activator="{ on }">
+            <v-btn color="grey darken-1" text v-on="on">
+                <v-icon>mdi-translate</v-icon><v-icon right>mdi-chevron-down</v-icon>
+            </v-btn>
+          </template>
+          <v-list dense nav>
+            <v-list-item v-for="(item, index) in languages" :key="index" :href="item.link" link>
+              <v-list-item-title>
+                <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-spacer></v-spacer>
+        
+     <!--   Theme button
+        <v-tooltip left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-menu :offset-y="100" open-on-click close-on-content-click >  
+              <template v-slot:activator="{ on }">
+                <v-btn color="grey darken-1" text v-on="on">
+                    <v-icon left>mdi-circle-half-full</v-icon>Theme
+                </v-btn>
+              </template>
+              <v-list dense nav>
+                <v-list-item v-for="(item, index) in theme" :key="index" :href="item.link" link v-bind="attrs" v-on="on">
+                  <v-list-item-title>
+                    <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </template>
+          <span>{{item}}</span>
+        </v-tooltip>
+    -->
+          <template>
+            <v-menu :offset-y="100" open-on-click close-on-content-click >
+              <template v-slot:activator="{ on }">
+                <v-btn color="grey darken-1" text v-on="on">
+                    <v-icon left>mdi-circle-half-full</v-icon>Theme
+                </v-btn>
+              </template>
+                  <v-list dense nav>
+                    <v-list-item v-for="(item, index) in theme" :key="index" :href="item.link" link >
+                       <v-tooltip left color="#fff" nudge-top="5" nudge-left="12">
+                          <template v-slot:activator="{ on, attrs }"> 
+                             <v-list-item-title v-bind="attrs" v-on="on"><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+                          </template>
+                          <span><v-img :src="require(`../assets/${item.img}`)"  width="350" aspect-ratio="1.7" contain></v-img></span>
+                        </v-tooltip>
+                   </v-list-item>
+                 </v-list>
+            </v-menu>
+          </template>
+
+    </v-toolbar>
+    <v-divider></v-divider>
+
+
+    <v-navigation-drawer absolute style="width:min-content;" v-model="drawer" :mini-variant.sync="mini" class="nav-drawer">
+     
+        <v-list-item style=""> 
+           <v-icon></v-icon>
+            <v-list-item-content >
+              <v-list-item-title></v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+
+
+        <v-tabs vertical v-model="MenuTabIndex" hide-slider class="menu-tabs"  active-class="menu-act-tabs">
+          <v-tab style="display:none"></v-tab>
+          <v-tab v-for="(item, index) in block" :key="index" @click="tabcount(index)" :ripple="false" class="menu-tab" >
+            <v-icon>{{item.icon}}</v-icon>
+          </v-tab>
+         
+         <v-tab-item></v-tab-item>
+          <v-tab-item v-for="item in block" :key="item" class="menu-tab-item" transition="">
+            <v-list dense nav>
+              <v-list-item>
+                <v-header class="menu-tab-item-header">
+                  {{ item.module }}
+                  <v-icon right @click.stop="mini = !mini" @click="deselect, drawer = !drawer" class="menu-tab-item-header-close">mdi-close-circle-outline</v-icon>
+                </v-header>
+              </v-list-item>
+              <div id="menu-tab-item-scrollbar">
+                <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon=" expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action color="#A0B2B6" class="menu-tab-item-list-group" style="padding-left:0px!important">
+                  <template v-slot:activator>
+                    <v-list-item-content>
+                      <v-list-item-title>{{ subitem.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+
+                  <v-list-item v-for="child in subitem.program" :key="child.title" style="padding-left:35px;" class="menu-tab-item-list-item" link>
+                    <v-list-item-content>
+                      <v-list-item-title><v-icon left small>{{child.icon}}</v-icon>{{ child.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-group>
+               </div>
+            </v-list>
+          </v-tab-item>
+        </v-tabs>
+      </v-navigation-drawer>
+
+  </div>
+  
+</template>
+<!--
+<template>
+  <div>
+    <template>
+      <div v-if="option == 0" class="d-inline-flex flex-wrap" style="width:100%;height: 400px;margin:0 auto;box-sizing: border-box;background:#555;">
+        <v-card outlined v-if="tables.length" v-for="(table,index) in tables" :key="table"  :style="{'flex-basis':(tables.length % tablecount(tables.length)=== 0) ? mainwidth(tablecount(tables.length)) : index > stay(tables.length, tablecount(tables.length))-1 ? subwidth(tables.length,tablecount(tables.length)) : mainwidth(tablecount(tables.length)), 'margin':'0.2%'}">{{table.text}}</v-card>
+      </div>
+    </template>
+    <template>
+      <div v-if="option == 1" class="d-inline-flex flex-wrap" style="width:100%;height: 400px;margin:0 auto;box-sizing: border-box;background:#555;">
+        <v-card outlined v-if="tables.length" v-for="(table,index) in tables" :key="table"  :style="{'flex-basis':(tables.length % 3 === 0) && (index+1) % 3 === 0 && index > tables.length-2? mainwidth(1) :(tables.length % 3 === 0) && (index+1) % 3 > 0 ? mainwidth(2) : (tables.length % 3 === 1) && ((index+1) % 3) === 1 && index > tables.length-2 ? mainwidth(1) :  ((index+1) % 3) > 0 ? mainwidth(2) : mainwidth(1) , 'margin':'0.2%'}">{{table.text}}</v-card>
+      </div>
+    </template>
+    <template>
+      <div v-if="option == 2" class="d-inline-flex flex-wrap" style="width:100%;height: 400px;margin:0 auto;box-sizing: border-box;background:#555;">
+        <v-card outlined v-if="tables.length" v-for="(table,index) in tables" :key="table"  :style="{'flex-basis':index === 0 || (index % 4) === 0 ? mainwidth(1) : index > (Math.floor(tables.length/(4.1))*4)-1 ? mainwidth(tables.length-((Math.floor(tables.length/(4.1)))*4)-1) : mainwidth(3), 'margin':'0.2%'}">{{table.text}}</v-card>
+      </div>
+    </template>
+    <v-btn outlined color="blue" @click="option0()" class="mt-5 ml-2" small>option 0</v-btn>
+    <v-btn outlined color="green" @click="option1()" class="mt-5 ml-2" small>option 1</v-btn>
+    <v-btn outlined color="orange" @click="option2()" class="mt-5 ml-2" small>option 2</v-btn>
+    <v-btn outlined color="black" @click="plus(tables.length+1)" class="mt-5 ml-6" small>plus</v-btn>
+    <v-btn outlined color="black" @click="minus()" class="mt-5 ml-2" small>minus</v-btn>
+  </div>
+</template>
+<template>
+  <div>
+      <v-expansion-panels accordion active-class="act-badg-num">
+        <v-expansion-panel v-for="(item,i) in 5" :key="i">
+          <v-expansion-panel-header><v-badge inline content="6" class="badg-num" color="">Item</v-badge></v-expansion-panel-header>
+          <v-expansion-panel-content></v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+  </div>
+
+ 
+</template>
+-->
+
+<script>
+import pmenu from "./menu.json";
+  export default {
+    data: () => ({
+      expand: false,
+      expandone: -1,
+      expandtab:[],
+      MenuTabIndex: 1,
+      tabseries: 0,
+      develop:{text:'Develop',value:'Develop'},
+      dashboard:[
+        {text:'Develop',value:'Develop'},
+        {text:'Live',value:'Live'},
+      ],
+      block:pmenu,
+      search_type:[
+        {icon:'',title:'All',link:''},
+        {icon:'',title:'Food',link:''},
+        {icon:'',title:'Event',link:''},
+        {icon:'',title:'Band',link:''},
+        {icon:'',title:'Movie',link:''},
+      ],
+      drawer: false,
+      mini: true,
+      miniopen: false,
+
+      tables:[
+        {text:'Table1'},
+      ],
+      theme:[
+        {icon:'',title:'Default',link:'',img:'default.png'},
+        {icon:'',title:'Blue',link:'',img:'blue.png'},
+        {icon:'',title:'White',link:'',img:'white.png'},
+        {icon:'',title:'Image',link:'',img:'image.png'},
+        {icon:'',title:'Vintage',link:'',img:'vintage.png'},
+        {icon:'',title:'Yellow',link:'',img:'yellow.png'},
+        {icon:'',title:'Red',link:'',img:'red.png'},
+        {icon:'',title:'Green',link:'',img:'green.png'},
+        {icon:'',title:'Dark',link:'',img:'dark.png'}
+      ],
+      languages:[
+        {icon:'',title:'English',link:''},
+        {icon:'',title:'繁體中文',link:''},
+        {icon:'',title:'日本語',link:''},
+        {icon:'',title:'한국어',link:''},
+      ],
+      options: [
+        {header:'header'},
+        {text:'All',value:'All'},
+        {text:'Active',value:'Active'},
+        {text:'Not Print',value:'Not Print'},
+        {text:'Incompolete',value:'Incompolete'},
+        {header:'header',value:'header'},
+        {text:'Header',value:'Header'},
+        {text:'Ready to Post',value:'Ready to Post'},
+        {text:'Posted',value:'Posted'},
+        {text:'Missing Tax Invoice',value:'Missing Tax Invoice'}
+        ],
+      tenants:[
+        {tenant:"ABC"},
+        {tenant:"DEF"}
+        ],
+        option:0,
+    }),
+    methods:{
+      deselect(){
+        this.MenuTabIndex = -1;
+      },
+      changeicon(i){
+        this.expandone = i+ this.tabseries;
+        this.expand = !this.expand;
+        if(this.expandtab.includes(this.expandone)){
+          var index = this.expandtab.indexOf(this.expandone);
+          if (index !== -1) {
+            this.expandtab.splice(index, 1);
+          }
+        }else{
+          this.expandtab.push(this.expandone)
+        }
+      },
+      tabcount(tabnumber){
+        this.tabseries = tabnumber * 100
+      },
+      tablecount(x){
+        if((x / 1) == 1){
+          return 1
+        }
+        else if((x % 10) == 0){
+          return 2
+        }
+        else if((x % 5) == 0){
+          return 3
+        }
+        else if((x % 7) == 0){
+          return 3
+        }
+        else if((x % 3) == 0){
+          return 3
+        }
+        else if((x % 2) == 0){
+          return 2
+        }
+      },
+      stay(l, w){
+        return (w*Math.floor(l / w))
+      },
+      remain(l, w){
+        return (l - (w*Math.floor(l / w)))
+      },
+      mainwidth(w){
+        return ((100-(0.4* w)) / (w) +'%')
+      },
+      subwidth(l, w){
+        return ((100-(0.4* (this.tablecount(l - (w*Math.floor(l / w)))))) / (this.tablecount(l - (w*Math.floor(l / w)))) +'%')
+      },
+      row(l, w){
+        return (Math.floor(l / w))
+      },
+      setheight(tablerow){
+          var h = (100-(0.4* tablerow)) / tablerow;
+          return h+'%'
+      },
+      plus(n){
+        var data = {text:'Table'+n};
+        this.tables.push(data)
+      },
+      minus(){
+        this.tables.pop()
+      },
+      option0(){
+        this.option = 0
+        return this.option
+      },
+      option1(){
+        this.option = 1
+        return this.option
+      },
+      option2(){
+        this.option = 2
+        return this.option
+      }
+    }
+  }
+</script>
+
+<style>
+
+*{
+  font-family: 'inter';
+}
+.v-main__wrap{
+  background:#f5f5f5;
+}
+.menu-btn:before{
+  transform: scale(0.8);
+  border-radius: 8px;
+}
+.nav-drawer{
+  background: #fff!important;
+  padding-left: 5px;
+  min-width: 61px!important;
+}
+.menu-tabs{
+	z-index:99;
+	max-width:100%;
+}
+.menu-act-tabs{
+  border-radius: 8px;
+  border: 4px solid #A0B2B6;
+  z-index:10;
+  transition: .18s;
+}
+.menu-tab{
+	min-width:50px;
+	max-width:50px;
+  max-height:50px;
+	padding: 0px 0px;
+  border-radius: 8px;
+  background: #F0F4F5;
+  margin: 5px 0;
+  font-size:30px!important;
+  color:#000
+}
+.menu-tab > .v-icon{
+  font-size:30px;
+  color:#555353;
+}
+.menu-act-tabs > .v-icon{
+  font-size:28px;
+  color:#555353;
+}
+
+.menu-tab:before{
+  opacity:0!important;
+}
+.menu-tab-item-list-group .v-list-group__header.v-list-item--active:not(:hover):not(:focus):before {
+    opacity: 0.12;
+}
+.menu-tab-item-list-group .v-list-group__header.v-list-item{
+  transition: color .1s;
+}
+.menu-tab-item-list-group .v-list-group__header.v-list-item:hover{
+  color:#A0B2B6;
+}
+.menu-tab-item-list-group .v-list-group__header.v-list-item:hover .v-icon{
+  color:#A0B2B6;
+}
+.menu-tab-item-list-item .v-list-item__content{
+  color:#888;
+}
+.menu-tab-item-list-item .v-icon{
+  color:#A0B2B6;
+}
+
+
+.menu-tab-item{
+  background: #f9f9f9;
+  padding: 0px;
+  min-height: calc( 100vh - 49px );
+  width: -webkit-fill-available;
+  width: -moz-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  margin-left: 5px;
+}
+.menu-tab-item-header{
+	font-weight:600;
+	color: #A0B2B6;
+	display:flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.menu-tab-item-header-close{
+  color: #A0B2B6!important;
+  font-weight:400;
+}
+#menu-tab-item-scrollbar{
+  height:calc(100vh - 49px - 60px);
+  overflow: hidden;
+  padding-right: 15px;
+}
+.menu-tab-item:hover #menu-tab-item-scrollbar{
+  overflow: overlay;
+}
+#menu-tab-item-scrollbar::-webkit-scrollbar {
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 50px;
+}
+#menu-tab-item-scrollbar::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+}
+#menu-tab-item-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 50px;
+    background-clip: content-box;
+    border: var(--STScrollBar-thumb-border);
+}
+#menu-tab-item-scrollbar::-webkit-scrollbar-track {
+    background-color: #eee;
+    border-radius: 50px;
+    display: block;
+    /*margin-top: var(--TRScrollBar-margin-top);*/
+    border: var(--STScrollBar-border);
+}
+
+#menu-tab-item-scrollbar .v-list-group__header  {
+    padding-left: 0px!important;
+}
+#menu-tab-item-scrollbar .v-list-group--sub-group {
+    display: block;
+}
+#menu-tab-item-scrollbar .v-list-group--sub-group {
+    display: block;
+}
+#menu-tab-item-scrollbar .v-list-item > *:not(:first-child) {
+    position: relative !important;
+    height: auto;
+    width: fit-content;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    display: initial;
+}
+
+#dashboard .v-select__selection--comma{
+  color: #A0B2B6!important;
+}
+
+.searchbar{
+  width:600px;
+}
+#select .v-select__selections {
+    color: #2660A4 !important;
+    font-weight:500;
+}
+#select{
+  max-width:none;
+  margin: 0em auto;
+  background: #fff;
+  border: 0px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+}
+
+.selectinput{
+  min-width:4.5em;
+  align-items: center;
+}
+#select .v-select__selections input { 
+  display: none;
+}
+#select .v-text-field .v-select__slot .v-select__selection--comma{
+  min-width: min-content;
+}
+  
+#select .v-text-field.v-text-field--solo .v-input__control{
+    min-height: 10px;
+}
+#select .v-text-field > .v-input__control > .v-input__slot:after {
+    border-width: 0 !important;
+}
+
+#select .v-text-field > .v-input__control > .v-input__slot:before {
+    display:none;
+}
+#select .v-text-field.v-input--dense .v-label {
+    top: 4px;
+    font-weight:400;
+    font-size: 14px;
+}
+#select .v-text-field .v-label--active {
+    max-width: 133%;
+    transform: translateY(-15px) scale(0.8);
+    pointer-events: auto;
+}
+.tenantstitleAct .v-text-field .v-label--active{
+    left:32px !important;
+}
+#select .v-text-field__prefix {
+    font-weight: 400;
+    font-size: 14px;
+    color:#666;
+}
+#select .v-text-field.v-input--dense:not(.v-text-field--outlined) .v-text-field__prefix {
+    padding-right: 6px;
+}
+#select .v-select__selection--comma{
+  color: #A0B2B6;
+  font-weight: 500;
+}
+.badg-num .v-badge__badge{
+  background: transparent!important;
+  color: #aaa!important;
+}
+.act-badg-num .v-badge__badge{
+  background : #849fb7!important;
+  color: #fff!important;
+}
+</style>
