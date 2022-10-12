@@ -196,12 +196,12 @@
         </v-col>
     </v-row>
         <v-spacer></v-spacer>
-
+<!--
        <v-row>
-        <v-col class="searchbar">            <!-- Search Bar -->
+        <v-col class="searchbar">             
           <v-text-field solo flat dense hide-details label="Search" append-icon="mdi-magnify" background-color="#f1f1f1" ></v-text-field>
         </v-col>
-        </v-row>
+        </v-row>-->
         <v-spacer></v-spacer>
         
         <v-btn icon>
