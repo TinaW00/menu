@@ -1,131 +1,5 @@
 
 <template>
-<!--
-  <div style="height:1080px">
-    <v-toolbar flat dense>
-        <v-icon>mdi-vector-combine</v-icon>
-        <v-spacer></v-spacer>
-        <v-img src="http://210.3.65.166/pgsfm3k/template/swivel2.png" max-height="60" max-width="150" contain></v-img>
-        <v-spacer></v-spacer>
-
-        <v-col>
-          <v-menu :offset-y="100" open-on-click close-on-content-click >
-            <template v-slot:activator="{ on }">
-              <v-btn color="grey darken-3" text v-on="on">
-                User <v-icon right>mdi-chevron-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
-                <v-list-item-title>
-                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-          </v-col>
-          <v-col>
-          <v-menu :offset-y="100" open-on-click close-on-content-click >
-            <template v-slot:activator="{ on }">
-              <v-btn color="grey darken-3" text v-on="on">
-                Menu <v-icon right>mdi-chevron-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
-                <v-list-item-title>
-                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-col>
-        <v-col>
-          <v-menu :offset-y="100" open-on-click close-on-content-click >
-            <template v-slot:activator="{ on }">
-              <v-btn color="grey darken-3" text v-on="on">
-                Role <v-icon right>mdi-chevron-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
-                <v-list-item-title>
-                  <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-col>
-
-        <v-col  cols="auto">
-          <div id="select">
-            <v-select :items="options" flat hide-details prefix="USER"  append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
-            </v-select>
-          </div>
-        </v-col>
-        <v-col  cols="auto">
-          <div id="select">
-            <v-select class="selectinput" :items="options" flat hide-details  append-icon="mdi-chevron-down" label="USER"  cols="auto" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
-            </v-select>
-          </div>
-        </v-col>
-
-        <v-spacer></v-spacer>
-
-       <v-row>
-        <v-col class="searchbar">
-          <v-text-field solo flat dense hide-details label="Search" append-icon="mdi-magnify" background-color="#f1f1f1" ></v-text-field>
-        </v-col>
-        </v-row>
-        <v-col>
-        <v-btn depressed outlined>
-        Component<v-icon right>mdi-chevron-down</v-icon>
-        </v-btn>
-        </v-col>
-        <v-spacer></v-spacer>
-        
-        
-        <v-btn icon>
-          <v-icon>mdi-history</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-cog-outline</v-icon>
-        </v-btn>
-
-        <v-menu :offset-y="100" open-on-click close-on-content-click >
-          <template v-slot:activator="{ on }">
-            <v-btn color="grey darken-1" text v-on="on">
-                <v-icon>mdi-translate</v-icon><v-icon right>mdi-chevron-down</v-icon>
-            </v-btn>
-          </template>
-          <v-list dense nav>
-            <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
-              <v-list-item-title>
-                <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <v-spacer></v-spacer>
-
-        <v-menu :offset-y="100" open-on-click close-on-content-click >
-          <template v-slot:activator="{ on }">
-            <v-btn color="grey darken-1" text v-on="on">
-                <v-icon left>mdi-circle-half-full</v-icon>Theme
-            </v-btn>
-          </template>
-          <v-list dense nav>
-            <v-list-item v-for="(item, index) in items" :key="index" :href="item.link" link>
-              <v-list-item-title>
-                <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-
-    </v-toolbar>
-    <v-divider></v-divider>
-
-      <div id="select">
-        <v-select :items="options" flat hide-details append-icon="mdi-chevron-down" label="user" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
-      </v-select>
-  </div>
--->
 
 
 <div>
@@ -137,7 +11,7 @@
         
         <v-col cols="auto">        
           <div id="select">
-            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-view-dashboard" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-view-dashboard" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
             </v-select>
           </div>
         </v-col>
@@ -150,7 +24,7 @@
     <v-row style="display:flex;justify-content: space-around;">
         <v-col cols="auto">      <!-- tenants  -->
           <div id="select" class="tenantstitleAct">
-            <v-select class="selectinput" :items="tenants" item-text="tenant" item-value="tenant" flat hide-details label="Tenant" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            <v-select class="selectinput" :items="tenants" item-text="tenant" item-value="tenant" flat hide-details label="Tenant" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
                <template v-slot:prepend-item></template>
                     <template v-slot:selection="data">
                         <v-list-item-avatar  style="height:24px;width:24px;min-width: 24px;margin:0px;">
@@ -175,19 +49,19 @@
         </v-col>
         <v-col cols="auto">         <!-- User -->
           <div id="select">
-            <v-select :items="options" flat hide-details prefix="User" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            <v-select :items="options" flat hide-details prefix="User" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
             </v-select>
           </div>
         </v-col>
         <v-col cols="auto" >        <!-- Menu -->
           <div id="select">
-            <v-select class="selectinput" :items="options" flat hide-details hide-selected append-icon="mdi-chevron-down" label="Menu" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            <v-select class="selectinput" :items="options" flat hide-details hide-selected append-icon="mdi-chevron-down" label="Menu" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
             </v-select>
           </div>
         </v-col>
         <v-col cols="auto" >        <!-- Role -->
           <div id="select">
-            <v-select class="selectinput" :items="options" item-color="grey darken-1" small-chips deletable-chips flat hide-details prefix="Role" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: auto }">
+            <v-select class="selectinput" :items="options" item-color="grey darken-1" small-chips deletable-chips flat hide-details prefix="Role" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
               <template #selection="{ item }">
                 <v-chip outlined color="#2660A4" style="max-height:27px">{{item.text}}</v-chip>
               </template>
@@ -196,12 +70,12 @@
         </v-col>
     </v-row>
         <v-spacer></v-spacer>
-<!--
+
        <v-row>
-        <v-col class="searchbar">             
+        <v-col class="searchbar">         <!-- search bar   -->
           <v-text-field solo flat dense hide-details label="Search" append-icon="mdi-magnify" background-color="#f1f1f1" ></v-text-field>
         </v-col>
-        </v-row>-->
+        </v-row>
         <v-spacer></v-spacer>
         
         <v-btn icon>
@@ -213,7 +87,7 @@
         <v-btn icon>
           <v-icon>mdi-palette-outline</v-icon>
         </v-btn>
-        <v-menu :offset-y="100" open-on-click close-on-content-click >           <!-- Translate button -->
+        <v-menu offset-y open-on-click close-on-content-click >           <!-- Translate button -->
           <template v-slot:activator="{ on }">
             <v-btn color="grey darken-1" text v-on="on">
                 <v-icon>mdi-translate</v-icon><v-icon right>mdi-chevron-down</v-icon>
@@ -231,7 +105,7 @@
      <!--   Theme button
         <v-tooltip left>
           <template v-slot:activator="{ on, attrs }">
-            <v-menu :offset-y="100" open-on-click close-on-content-click >  
+            <v-menu offset-y open-on-click close-on-content-click >  
               <template v-slot:activator="{ on }">
                 <v-btn color="grey darken-1" text v-on="on">
                     <v-icon left>mdi-circle-half-full</v-icon>Theme
@@ -249,7 +123,7 @@
         </v-tooltip>
     -->
           <template>
-            <v-menu :offset-y="100" open-on-click close-on-content-click >
+            <v-menu offset-y open-on-click close-on-content-click >
               <template v-slot:activator="{ on }">
                 <v-btn color="grey darken-1" text v-on="on">
                     <v-icon left>mdi-circle-half-full</v-icon>Theme
@@ -290,13 +164,13 @@
           </v-tab>
          
          <v-tab-item></v-tab-item>
-          <v-tab-item v-for="item in block" :key="item" class="menu-tab-item" transition="">
+          <v-tab-item v-for="item in block" :key="item.module" class="menu-tab-item" transition=" ">
             <v-list dense nav>
               <v-list-item>
-                <v-header class="menu-tab-item-header">
+                <header class="menu-tab-item-header">
                   {{ item.module }}
                   <v-icon right @click.stop="mini = !mini" @click="deselect, drawer = !drawer" class="menu-tab-item-header-close">mdi-close-circle-outline</v-icon>
-                </v-header>
+                </header>
               </v-list-item>
               <div id="menu-tab-item-scrollbar">
                 <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon=" expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action color="#A0B2B6" class="menu-tab-item-list-group" style="padding-left:0px!important">
@@ -695,7 +569,6 @@ import pmenu from "./menu.json";
 #select .v-text-field .v-label--active {
     max-width: 133%;
     transform: translateY(-15px) scale(0.8);
-    pointer-events: auto;
 }
 .tenantstitleAct .v-text-field .v-label--active{
     left:32px !important;
