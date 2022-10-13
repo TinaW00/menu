@@ -173,7 +173,7 @@
                 </header>
               </v-list-item>
               <div id="menu-tab-item-scrollbar">
-                <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon=" expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action color="#A0B2B6" class="menu-tab-item-list-group" style="padding-left:0px!important">
+                <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon=" expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action :color="`var(--Menu-ListItem-GroupHeader-HoverAct-color)`" class="menu-tab-item-list-group" style="padding-left:0px!important;">
                   <template v-slot:activator>
                     <v-list-item-content>
                       <v-list-item-title>{{ subitem.title }}</v-list-item-title>
@@ -393,7 +393,7 @@ import pmenu from "./menu.json";
   border-radius: 8px;
 }
 .nav-drawer{
-  background: #fff!important;
+  background: var(--Menu-bg)!important;
   padding-left: 5px;
   min-width: 61px!important;
 }
@@ -402,31 +402,31 @@ import pmenu from "./menu.json";
 	max-width:100%;
 }
 .menu-act-tabs{
-  border-radius: 8px;
-  border: 4px solid #A0B2B6;
+  border: 4px solid;
+  border-color: var(--Menu-tabs-border-color);
   z-index:10;
   transition: .18s;
 }
 .menu-tab{
-	min-width:50px;
-	max-width:50px;
-  max-height:50px;
+	min-width: var(--Menu-tab-width-height);
+	max-width: var(--Menu-tab-width-height);
+  max-height: var(--Menu-tab-width-height);
 	padding: 0px 0px;
-  border-radius: 8px;
-  background: #F0F4F5;
+  border-radius: var(--Menu-tab-border-radius);
+  background: var(--Menu-tab-bg);
   margin: 5px 0;
-  font-size:30px!important;
-  color:#000
 }
 .menu-tab > .v-icon{
   font-size:30px;
-  color:#555353;
+  color:var(--Menu-tab-color);
 }
 .menu-act-tabs > .v-icon{
   font-size:28px;
-  color:#555353;
+  color:var(--Menu-tab-act-color);
 }
-
+:root{
+  --Menu-ListItem-GroupHeader-HoverAct-color:#A0B2B6
+}
 .menu-tab:before{
   opacity:0!important;
 }
@@ -436,22 +436,31 @@ import pmenu from "./menu.json";
 .menu-tab-item-list-group .v-list-group__header.v-list-item{
   transition: color .1s;
 }
+.menu-tab-item-list-group .v-list-group__header.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
+  color: var(--Menu-ListItem-GroupHeader-color)!important;
+}
+.menu-tab-item-list-group .v-list-group__header.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) .v-icon{
+  color: var(--Menu-ListItem-GroupHeader-color)!important;
+}
+.menu-tab-item-list-group .v-icon{
+  font-size: 16px;
+}
 .menu-tab-item-list-group .v-list-group__header.v-list-item:hover{
-  color:#A0B2B6;
+  color:var(--Menu-ListItem-GroupHeader-HoverAct-color)!important;
 }
 .menu-tab-item-list-group .v-list-group__header.v-list-item:hover .v-icon{
-  color:#A0B2B6;
+  color:var(--Menu-ListItem-GroupHeader-HoverAct-color)!important;
 }
 .menu-tab-item-list-item .v-list-item__content{
-  color:#888;
+  color:var(--Menu-ListItem-GroupContent-color);
 }
 .menu-tab-item-list-item .v-icon{
-  color:#A0B2B6;
+  color:var(--Menu-ListItem-GroupContent-icon-color);
 }
 
 
 .menu-tab-item{
-  background: #f9f9f9;
+  background: var(--Menu-Tab-ListItem-bg);
   padding: 0px;
   min-height: calc( 100vh - 49px );
   width: -webkit-fill-available;
@@ -462,13 +471,13 @@ import pmenu from "./menu.json";
 }
 .menu-tab-item-header{
 	font-weight:600;
-	color: #A0B2B6;
+	color: var(--Menu-ListItem-Title-color);
 	display:flex;
 	justify-content: space-between;
 	width: 100%;
 }
 .menu-tab-item-header-close{
-  color: #A0B2B6!important;
+  color: var(--Menu-ListItem-Title-color)!important;
   font-weight:400;
 }
 #menu-tab-item-scrollbar{
@@ -480,27 +489,25 @@ import pmenu from "./menu.json";
   overflow: overlay;
 }
 #menu-tab-item-scrollbar::-webkit-scrollbar {
-    width: 0.4em;
-    height: 0.4em;
-    border-radius: 50px;
+    width: var(--Menu-ListItem-ScrollBar-width-height);
+    height: var(--Menu-ListItem-ScrollBar-width-height);
+    border-radius: var(--Menu-ListItem-ScrollBar-border-radius);
 }
 #menu-tab-item-scrollbar::-webkit-scrollbar-track-piece:start {
     background: transparent;
 }
 #menu-tab-item-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 50px;
+    background-color: var(--Menu-ListItem-ScrollBar-color);
+    border-radius: var(--Menu-ListItem-ScrollBar-border-radius);
     background-clip: content-box;
     border: var(--STScrollBar-thumb-border);
 }
 #menu-tab-item-scrollbar::-webkit-scrollbar-track {
-    background-color: #eee;
-    border-radius: 50px;
+    background-color: var(--Menu-ListItem-ScrollBar-bg);
+    border-radius: var(--STScrollBar-thumb-border);
     display: block;
-    /*margin-top: var(--TRScrollBar-margin-top);*/
     border: var(--STScrollBar-border);
 }
-
 #menu-tab-item-scrollbar .v-list-group__header  {
     padding-left: 0px!important;
 }
@@ -521,7 +528,7 @@ import pmenu from "./menu.json";
 }
 
 #dashboard .v-select__selection--comma{
-  color: #A0B2B6!important;
+  color: var(--Menu-Dashboard-Selected-color)!important;
 }
 
 .searchbar{
