@@ -424,9 +424,7 @@ import pmenu from "./menu.json";
   font-size:28px;
   color:var(--Menu-tab-act-color);
 }
-:root{
-  --Menu-ListItem-GroupHeader-HoverAct-color:#A0B2B6
-}
+
 .menu-tab:before{
   opacity:0!important;
 }
