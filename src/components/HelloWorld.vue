@@ -6,7 +6,7 @@
         
         <v-col cols="auto">        
           <div id="select">
-            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-collage" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
+            <v-select class="selectinput dashboard" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-collage" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
             </v-select>
           </div>
         </v-col>
@@ -398,6 +398,10 @@ import pmenu from "./menu.json";
   --Menu-ListItem-ScrollBar-color : #ccc;
   --Menu-ListItem-ScrollBar-bg : #eee;
   --Menu-Dashboard-Selected-color : #A0B2B6;
+
+  --System-Body-bg :#F5f5f5;
+  --Menu-Dashboard-icon-color :#A0B2B6;
+  --System-Top-select--comma-color :#A0B2B6;
 }
 *{
   font-family: 'inter';
@@ -542,23 +546,32 @@ import pmenu from "./menu.json";
     display: initial;
 }
 
-#dashboard .v-select__selection--comma{
-  color: var(--Menu-Dashboard-Selected-color)!important;
+.dashboard{
+  padding: 0 4px;
+  transition: background .2s;
+}
+.dashboard .v-icon{
+  color: var(--Menu-Dashboard-icon-color);
+}
+.dashboard:hover {
+  background: var(--System-Body-bg);
+  width: 100%;
+  border-radius: 4px;
 }
 
 .searchbar{
   width:600px;
 }
-#select .v-select__selections {
+/* #select .v-select__selections {
     color: #2660A4 !important;
     font-weight:500;
-}
+} */
 #select{
   max-width:none;
   margin: 0em auto;
-  background: #fff;
-  border: 0px solid #ddd;
-  border-radius: 4px;
+  background: var(--System-Top-select-bg);
+  border: var(--System-Top-select-border);
+  border-radius: 12px;
   display: flex;
 }
 
@@ -598,15 +611,16 @@ import pmenu from "./menu.json";
 #select .v-text-field__prefix {
     font-weight: 400;
     font-size: 14px;
-    color:#666;
+    color: var(--System-Top-select-color);
 }
 #select .v-text-field.v-input--dense:not(.v-text-field--outlined) .v-text-field__prefix {
     padding-right: 6px;
 }
 #select .v-select__selection--comma{
-  color: #A0B2B6;
+  color: var(--System-Top-select--comma-color);
   font-weight: 500;
 }
+
 .badg-num .v-badge__badge{
   background: transparent!important;
   color: #aaa!important;
