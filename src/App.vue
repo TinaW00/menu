@@ -3,6 +3,7 @@
     
     <v-main>
       <HelloWorld/>
+      <!-- <HintComponent/> -->
     </v-main>
 
    
@@ -11,6 +12,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
+// import HintCompnent from './components/HintComponent';
 
 
 export default {
@@ -18,6 +20,7 @@ export default {
 
   components: {
     HelloWorld,
+    // HintComponent,
   },
 
   data: () => ({

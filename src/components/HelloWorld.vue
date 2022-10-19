@@ -1,17 +1,12 @@
 
 <template>
-
-
 <div>
-      
-
-
  <v-toolbar flat dense style="z-index: 99;">                     <!-- Tool bar  -->
         <v-btn icon  class="menu-btn" @click.stop="drawer = !drawer, MenuTabIndex = 1" :ripple="false" v-ripple="false"><v-icon  large>mdi-text-short</v-icon></v-btn>          <!-- Home button  -->
         
         <v-col cols="auto">        
           <div id="select">
-            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-view-dashboard" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
+            <v-select class="selectinput" :items="dashboard" v-model="develop" item-text="text" flat hide-details prepend-icon="mdi-collage" append-icon="" color="#A0B2B6" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
             </v-select>
           </div>
         </v-col>
@@ -148,7 +143,7 @@
 
     <v-navigation-drawer absolute style="width:min-content;" v-model="drawer" :mini-variant.sync="mini" class="nav-drawer">
      
-        <v-list-item style=""> 
+        <v-list-item> 
            <v-icon></v-icon>
             <v-list-item-content >
               <v-list-item-title></v-list-item-title>
@@ -169,7 +164,7 @@
               <v-list-item>
                 <header class="menu-tab-item-header">
                   {{ item.module }}
-                  <v-icon right @click.stop="mini = !mini" @click="deselect, drawer = !drawer" class="menu-tab-item-header-close">mdi-close-circle-outline</v-icon>
+                  <v-icon @click.stop="mini = !mini" @click="deselect, drawer = !drawer" class="menu-tab-item-header-close">mdi-close-circle-outline</v-icon>
                 </header>
               </v-list-item>
               <div id="menu-tab-item-scrollbar">
@@ -381,7 +376,29 @@ import pmenu from "./menu.json";
 </script>
 
 <style>
-
+:root{
+  --Menu-bg : #fff;
+  --Menu-Tabs-border: 4px solid;
+  --Menu-Tabs-border-color : #A0B2B6;
+  --Menu-Tab-width-height : 40px;
+  --Menu-Tab-border-radius : 12px;
+  --Menu-Tab-bg : #F0F4F5;
+  --Menu-Tab-color : #555353;
+  --Menu-Tab-font-size: 30px;
+  --Menu-Tab-Act-color: #555353;
+  --Menu-Tab-Act-font-size :28px;
+  --Menu-ListItem-bg : #f9f9f9;
+  --Menu-ListItem-Title-color : #A0B2B6;
+  --Menu-ListItem-GroupHeader-color : #757575;
+  --Menu-ListItem-GroupHeader-HoverAct-color : #A0B2B6;
+  --Menu-ListItem-GroupContent-icon-color : #A0B2B6;
+  --Menu-ListItem-GroupContent-color : #888;
+  --Menu-ListItem-ScrollBar-width-height : 0.4em;
+  --Menu-ListItem-ScrollBar-border-radius : 50px;
+  --Menu-ListItem-ScrollBar-color : #ccc;
+  --Menu-ListItem-ScrollBar-bg : #eee;
+  --Menu-Dashboard-Selected-color : #A0B2B6;
+}
 *{
   font-family: 'inter';
 }
@@ -402,27 +419,27 @@ import pmenu from "./menu.json";
 	max-width:100%;
 }
 .menu-act-tabs{
-  border: 4px solid;
-  border-color: var(--Menu-tabs-border-color);
+  border: var(--Menu-Tabs-border);
+  border-color: var(--Menu-Tabs-border-color);
   z-index:10;
   transition: .18s;
 }
 .menu-tab{
-	min-width: var(--Menu-tab-width-height);
-	max-width: var(--Menu-tab-width-height);
-  max-height: var(--Menu-tab-width-height);
+	min-width: var(--Menu-Tab-width-height);
+	max-width: var(--Menu-Tab-width-height);
+  max-height: var(--Menu-Tab-width-height);
 	padding: 0px 0px;
-  border-radius: var(--Menu-tab-border-radius);
-  background: var(--Menu-tab-bg);
+  border-radius: var(--Menu-Tab-border-radius);
+  background: var(--Menu-Tab-bg);
   margin: 5px 0;
 }
 .menu-tab > .v-icon{
-  font-size:30px;
-  color:var(--Menu-tab-color);
+  font-size: var(--Menu-Tab-font-size);
+  color: var(--Menu-Tab-color);
 }
 .menu-act-tabs > .v-icon{
-  font-size:28px;
-  color:var(--Menu-tab-act-color);
+  font-size: var(--Menu-Tab-Act-font-size);
+  color: var(--Menu-Tab-Act-color);
 }
 
 .menu-tab:before{
@@ -458,7 +475,7 @@ import pmenu from "./menu.json";
 
 
 .menu-tab-item{
-  background: var(--Menu-Tab-ListItem-bg);
+  background: var(--Menu-ListItem-bg);
   padding: 0px;
   min-height: calc( 100vh - 49px );
   width: -webkit-fill-available;
