@@ -48,15 +48,13 @@
                       <td colspan="2" style="border:0">
                         <span id="hint-file">
                           <v-file-input label="Select A File" solo flat dense hide-details class="file"></v-file-input>
-                          <!-- <input type="text" id="filename" name="filename" class="filename">
-                          <input type="button" class="filebutton" value="選取檔案 ">
-                          <input type="file" id="file" name="file" class="file" onchange="document.getElementById('filename').value = this.value"> -->
                         </span>
                       </td>
                     </tr>
                     <tr>
                       <td>File name</td>
-                      <td><input type="text" id="filename" name="filename"></td>
+                      <td><input type="text" id="filename" name="filename" v-model="imgfilename"></td>
+                      
                     </tr>
                     <tr>
                       <td>Width</td>
@@ -91,6 +89,7 @@
 <script>
   export default {
     data: () => ({
+      imgfile:"",
       hinttabs:[{tabname:'VIEW',icon:'mdi-eye-outline'},{tabname:'EDIT',icon:'mdi-playlist-edit'},{tabname:'HTML',icon:'mdi-code-braces'},{tabname:'CONFIG',icon:'mdi-cog-outline'}],
       tabs: null,
       hintview:[{"key":"--System-height", "property" : {"image":"blue.png","text" : "This is a testing"}}]
