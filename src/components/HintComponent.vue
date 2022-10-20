@@ -60,6 +60,10 @@
                       <td>Width</td>
                       <td><input type="text" id="widht" name="width"></td>
                     </tr>
+                    <!-- <tr>
+                      <td>Height</td>
+                      <td><input type="text" id="height" name="height"></td>
+                    </tr> -->
                     <tr>
                       <td>Position</td>
                       <td><input type="text" id="position" name="position"></td>
