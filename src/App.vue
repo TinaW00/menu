@@ -2,8 +2,8 @@
   <v-app>
     
     <v-main>
-      <HelloWorld/>
-      <!-- <HintComponent/> -->
+      <!-- <HelloWorld/> -->
+      <HintComponent/>
     </v-main>
 
    
@@ -11,16 +11,16 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-// import HintCompnent from './components/HintComponent';
+// import HelloWorld from './components/HelloWorld';
+import HintComponent from './components/HintComponent';
 
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
-    // HintComponent,
+    // HelloWorld,
+    HintComponent,
   },
 
   data: () => ({
