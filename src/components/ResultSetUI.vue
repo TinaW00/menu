@@ -10,8 +10,7 @@
         <div id="resultset-submenu">
           <v-navigation-drawer id="resultset-submenu-navlist" permanent floating>
             <v-list dense nav>
-              <v-list-item-group v-model="resultsetmenuindex" class="resultset-menu-nav-group" active-class="resultset-menu-nav-act">
-                <v-list-item v-for="(item, index) in resultsetmenu" :key="item.navname" @click="navtemplatelink(item.navname)" link class="result-menu-nav">
+                <v-list-item v-for="(item, index) in resultsetmenu" :key="item.navname" @click="navtemplatelink(item.navname),resultsetmenuindex = index" link class="result-menu-nav" :class="resultsetmenuindex == index ? 'resultset-menu-nav-act': ''" active-class="resultset-menu-nav-act">
                   <v-list-item-icon>
                     <v-icon class="navicon">{{ item.icon }}</v-icon>
                   </v-list-item-icon>
@@ -22,7 +21,6 @@
                     <v-icon right class="resultset-menu-nav-arrow">mdi-arrow-right-thick</v-icon>
                   </v-list-item-icon>
                 </v-list-item>
-              </v-list-item-group>
             </v-list>
           </v-navigation-drawer>
 
@@ -81,16 +79,29 @@
               <v-card class="tab-card">
                 <v-list-item class="tab-card-content">
                   <v-list-item-content>
-                      <div class="tab-card-content-title"><v-icon left>mdi-menu</v-icon>SQL</div>
-                      <v-divider></v-divider>
-                      <textarea class="tab-card-content-text">123</textarea>
+                    <div class="tab-card-content-title">
+                      <v-icon left>mdi-menu</v-icon>SQL<v-spacer></v-spacer>
+                      <span style="float:right">
+                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                        <v-icon right>mdi-database-check</v-icon>
+                        <v-icon right>mdi-magnify</v-icon>
+                      </span>
+                    </div>
+                    <v-divider></v-divider>
+                    <textarea class="tab-card-content-text"></textarea>
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
               <v-card class="tab-card tab-card-JsonEditor">
                 <v-list-item class="tab-card-content">
                   <v-list-item-content>
-                      <div class="tab-card-content-title"><v-icon left>mdi-menu</v-icon>Ask</div>
+                      <div class="tab-card-content-title">
+                        <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
+                        <span style="float:right">
+                          <v-icon right>mdi-format-font-size-increase</v-icon>
+                          <v-icon right>mdi-magnify</v-icon>
+                        </span>
+                      </div>
                       <v-divider></v-divider>
                       <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
                         <!-- <template v-slot:item.calories="{ item }">
@@ -261,19 +272,20 @@
   border: 0px;
   background: transparent;
 }
-.resultset-menu-nav-group .v-list-item__title{
+.resultset-menu-nav .v-list-item__title{
   color: #757575;
   font-size: 16px!important;
   line-height: 20px;
 }
-.resultset-menu-nav-group{
+.resultset-menu-nav{
   color: #757575;
 }
-.resultset-menu-nav-group{
+.resultset-menu-nav{
   color: #757575;
 }
 .resultset-menu-nav:hover{
   background: #D6E2E6;
+  border-radius: 12px!important;
 }
 .resultset-menu-nav-arrow{
   font-size: 20px!important;
@@ -420,6 +432,10 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+}
+.tab-card-content-title .v-icon{
+  color: #A0B2B6;
+  font-weight: 400;
 }
 .tab-card-content-text{
   padding: 8px;
