@@ -33,6 +33,7 @@
               <v-list-item-content>
                 <v-list-item-title>
                   <v-icon left class="componenticon">mdi-file-excel</v-icon> Excel
+                  <v-icon v-if="componentchecked.length >0 " class="component-download-icon" >mdi-download</v-icon>
                 </v-list-item-title>
                 <!-- <v-list-item-subtitle>
                   subtext
@@ -43,7 +44,7 @@
               <v-list-item v-for="item in resultsetmenu" :key="item.navname">
                 <v-list-item-content>
                   <!-- <v-list-item-title>{{ item.navname }}</v-list-item-title> -->
-                  <v-checkbox dense v-model="resultsetcomponent" :label="`${item.navname}`" color="success" :value="`${item.navname}`" hide-details :ripple="false"></v-checkbox>
+                  <v-checkbox dense v-model="componentchecked" :label="`${item.navname}`" color="success" :value="`${item.navname}`" hide-details :ripple="false"></v-checkbox>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -82,6 +83,7 @@
                   <v-list-item-content>
                       <div class="tab-card-content-title"><v-icon left>mdi-menu</v-icon>SQL</div>
                       <v-divider></v-divider>
+                      <textarea class="tab-card-content-text">123</textarea>
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -125,7 +127,7 @@
     data: () => ({
       tabs: 1,
       resultsetmenu:[{navname:'Property',icon:'mdi-cog',link:'https://github.com/vuetifyjs/vuetify'},{navname:'Browse',icon:'mdi-table-large',link:'https://github.com/vuetifyjs/vuetify'}],
-      resultsetcomponent:[],
+      componentchecked:[],
       resultsetmenuindex:0,
       resultsetbody:[{tabname:'Property',icon:'mdi-cog'},{tabname:'SQL',icon:'mdi-database'},{tabname:'DATAMODEL',icon:'mdi-database'}],
       navtemplate:'Property',
@@ -322,6 +324,12 @@
   margin: 0;
   padding: 0;
 }
+.component-download-icon {
+  float: right;
+  color: #000!important;
+}
+
+
 
 .resultset-tabs .v-slide-group__content {
     justify-content: end;
@@ -412,6 +420,11 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+}
+.tab-card-content-text{
+  padding: 8px;
+  outline: none;
+  min-height: calc(20vh - 40px);
 }
 .tab-card .v-list-item{
   min-height: auto;
