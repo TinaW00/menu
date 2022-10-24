@@ -3,7 +3,7 @@
 <div>
     <div id="main">
 
-      <v-col cols="2" style="padding-right:20px">
+      <v-col cols="2" style="padding-right:0px">
         <div id="resultset-title">
           <span ><v-icon left>mdi-pencil-ruler</v-icon>Profit and Loss</span>
         </div>
@@ -21,16 +21,17 @@
                     <v-icon right class="resultset-menu-nav-arrow">mdi-arrow-right-thick</v-icon>
                   </v-list-item-icon>
                 </v-list-item>
+
             </v-list>
           </v-navigation-drawer>
 
         </div>
         <div id="resultset-component">
-          <v-navigation-drawer permanent id="resultset-component-navlist" floating>
+          <v-navigation-drawer permanent id="resultset-component-navlist" floating v-for="item in componentitem" :key="item.component">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <v-icon left class="componenticon">mdi-file-excel</v-icon> Excel
+                  <v-icon left class="componenticon">{{item.icon}}</v-icon> {{item.component}}
                   <v-icon v-if="componentchecked.length >0 " class="component-download-icon" >mdi-download</v-icon>
                 </v-list-item-title>
                 <!-- <v-list-item-subtitle>
@@ -39,10 +40,10 @@
               </v-list-item-content>
             </v-list-item>
             <v-list dense>
-              <v-list-item v-for="item in resultsetmenu" :key="item.navname">
-                <v-list-item-content>
+              <v-list-item >
+                <v-list-item-content id="component-content">
                   <!-- <v-list-item-title>{{ item.navname }}</v-list-item-title> -->
-                  <v-checkbox dense v-model="componentchecked" :label="`${item.navname}`" color="success" :value="`${item.navname}`" hide-details :ripple="false"></v-checkbox>
+                  <v-checkbox v-for="componentfiles in item.title" :key="componentfiles.item" dense v-model="componentchecked" :label="`${componentfiles.item}`" color="success" :value="`${componentfiles.item}`" hide-details :ripple="false" class="component-checkbox"></v-checkbox>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -51,6 +52,53 @@
         <div></div>
       </v-col>
       <v-col cols="10">
+
+        <v-stepper v-model="stepnow">
+      <v-stepper-header>
+        <v-stepper-step :complete="stepnow > 1" step="1" editable>
+          Name of step 1
+        </v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step :complete="stepnow > 2" step="2" editable>
+          Name of step 2
+        </v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step :complete="stepnow > 3" step="3" editable>
+          Name of step 3
+        </v-stepper-step>
+      </v-stepper-header>
+
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+
+        </v-stepper-content>
+
+        <v-stepper-content step="2">
+          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+
+        </v-stepper-content>
+        <v-stepper-content step="3">
+          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+
+        </v-stepper-content>
+
+      
+        <v-btn color="primary" @click="stepnow += 1">
+            Next
+          </v-btn>
+
+          <v-btn text v-if="stepnow > 1" @click="stepnow -= 1">
+            Prev
+          </v-btn>
+      </v-stepper-items>
+    </v-stepper>
+
+
+
+
         <template v-if="navtemplate == 'Property'">
           <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
             <!-- <v-hover v-slot="{ hover }"> -->
@@ -138,13 +186,27 @@
     data: () => ({
       tabs: 1,
       resultsetmenu:[{navname:'Property',icon:'mdi-cog',link:'https://github.com/vuetifyjs/vuetify'},{navname:'Browse',icon:'mdi-table-large',link:'https://github.com/vuetifyjs/vuetify'}],
+      componentitem:[
+        {
+          component:'Excel',
+          icon:'mdi-file-excel',
+          title:[
+            {item:'Monthly Profit and Loss'},
+            {item:'Profit and Loss by Division'},
+            {item:'Yearly Profit and Loss'},
+            {item:'Yearly Profit and Loss'},
+   
+          ]
+        }
+      ],
       componentchecked:[],
       resultsetmenuindex:0,
+      stepnow:1,
       resultsetbody:[{tabname:'Property',icon:'mdi-cog'},{tabname:'SQL',icon:'mdi-database'},{tabname:'DATAMODEL',icon:'mdi-database'}],
       navtemplate:'Property',
       JsonEditorHeaders: [
         {
-          text: 'Dessert (100g serving)',
+          text: '',
           align: 'start',
           value: 'btn',
         },
@@ -163,46 +225,26 @@
       },
       {
         btn: '',
-        key: 'xvdate1',
+        key: 'xvdate2',
         title: 'Date',
         datatype: 'Date',
-        testvalue: '2021/01/01',
+        testvalue: '2021/06/01',
       },
       {
         btn: '',
-        key: 'xvdate1',
+        key: 'xvdate3',
         title: 'Date',
         datatype: 'Date',
-        testvalue: '2021/01/01',
+        testvalue: '2021/12/01',
       },
       {
         btn: '',
-        key: 'xvdate1',
+        key: 'xvdate4',
         title: 'Date',
         datatype: 'Date',
-        testvalue: '2021/01/01',
+        testvalue: '2022/01/01',
       },
-      {
-        btn: '',
-        key: 'xvdate1',
-        title: 'Date',
-        datatype: 'Date',
-        testvalue: '2021/01/01',
-      },
-      {
-        btn: '',
-        key: 'xvdate1',
-        title: 'Date',
-        datatype: 'Date',
-        testvalue: '2021/01/01',
-      },
-      {
-        btn: '',
-        key: 'xvdate1',
-        title: 'Date',
-        datatype: 'Date',
-        testvalue: '2021/01/01',
-      },
+
     ],
     }),
     methods:{
@@ -256,10 +298,12 @@
   padding: 12px;
   font-size:20px;
   font-weight:600;
-  color: #FF9800;
+  /* color: #FF9800; */
+  color: #000;
 }
 #resultset-title .v-icon{
-  color: #FF9800;
+  /* color: #FF9800; */
+  color: #000;
 }
 #resultset-submenu{
   max-height:32%;
@@ -312,6 +356,9 @@
   border: 0px;
   background: #fff;
 }
+#resultset-component-navlist .v-list-item{
+    /* padding-right: 8px; */
+}
 #resultset-component-navlist .v-list-item__title{
   color: #65C468;
   font-size: 18px;
@@ -321,7 +368,8 @@
   color: #65C468;
 }
 #resultset-component-navlist .v-list-item__content{
-  padding: 0px;
+  /* padding: 0px; */
+  overflow: auto;
   
 }
 #resultset-component-navlist label{
@@ -331,9 +379,34 @@
   margin: 0;
   padding: 0;
 }
+.component-checkbox{
+  white-space: nowrap;
+}
 .component-download-icon {
   float: right;
   color: #000!important;
+}
+#component-content{
+  max-height: 31vh;
+  padding: 3px 0px;
+}
+#component-content::-webkit-scrollbar {
+    width: 0.4em;
+    height: 0.4em;
+}
+#component-content::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+}
+#component-content::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: var(--Menu-ListItem-ScrollBar-border-radius);
+    background-clip: content-box;
+}
+#component-content::-webkit-scrollbar-track {
+    background-color: #eee;
+    border-radius: var(--STScrollBar-thumb-border);
+    display: block;
+    border: var(--STScrollBar-border);
 }
 
 
