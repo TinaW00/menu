@@ -10,12 +10,12 @@
         <div id="resultset-submenu">
           <v-navigation-drawer id="resultset-submenu-navlist" permanent floating>
             <v-list dense nav>
-                <v-list-item v-for="(item, index) in resultsetmenu" :key="item.navname" @click="navtemplatelink(item.navname),resultsetmenuindex = index" link class="result-menu-nav" :class="resultsetmenuindex == index ? 'resultset-menu-nav-act': ''" active-class="resultset-menu-nav-act">
+                <v-list-item v-for="(item, index) in resultsetmenu" :key="item.navname" @click="navtemplatelink(item.navname),resultsetmenuindex = index" link :class="resultsetmenuindex == index ? 'resultset-menu-nav-act': 'result-menu-nav'">
                   <v-list-item-icon>
                     <v-icon class="navicon">{{ item.icon }}</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content style="text-transform: uppercase;">
-                    <v-list-item-title>{{ item.navname }}</v-list-item-title>
+                    <v-list-item-title class="resultset-menu-nav-title">{{ item.navname }}</v-list-item-title>
                   </v-list-item-content>
                   <v-list-item-icon v-if="index === resultsetmenuindex">
                     <v-icon right class="resultset-menu-nav-arrow">mdi-arrow-right-thick</v-icon>
@@ -88,7 +88,7 @@
                       </span>
                     </div>
                     <v-divider></v-divider>
-                    <textarea class="tab-card-content-text"></textarea>
+                    <textarea class="tab-card-content-text" placeholder=""></textarea>
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -272,17 +272,12 @@
   border: 0px;
   background: transparent;
 }
-.resultset-menu-nav .v-list-item__title{
+.resultset-menu-nav-title{
   color: #757575;
   font-size: 16px!important;
   line-height: 20px;
 }
-.resultset-menu-nav{
-  color: #757575;
-}
-.resultset-menu-nav{
-  color: #757575;
-}
+
 .resultset-menu-nav:hover{
   background: #D6E2E6;
   border-radius: 12px!important;
