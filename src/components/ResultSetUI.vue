@@ -7,7 +7,7 @@
         <div id="resultset-title">
           <span ><v-icon left>mdi-pencil-ruler</v-icon>Profit and Loss</span>
         </div>
-        <div id="resultset-submenu">
+        <!-- <div id="resultset-submenu">
           <v-navigation-drawer id="resultset-submenu-navlist" permanent floating>
             <v-list dense nav>
                 <v-list-item v-for="(item, index) in resultsetmenu" :key="item.navname" @click="navtemplatelink(item.navname),resultsetmenuindex = index" link :class="resultsetmenuindex == index ? 'resultset-menu-nav-act': 'result-menu-nav'">
@@ -21,11 +21,10 @@
                     <v-icon right class="resultset-menu-nav-arrow">mdi-arrow-right-thick</v-icon>
                   </v-list-item-icon>
                 </v-list-item>
-
             </v-list>
           </v-navigation-drawer>
+        </div> -->
 
-        </div>
         <div id="resultset-component">
           <v-navigation-drawer permanent id="resultset-component-navlist" floating v-for="item in componentitem" :key="item.component">
             <v-list-item>
@@ -53,126 +52,99 @@
       </v-col>
       <v-col cols="10">
 
-        <v-stepper v-model="stepnow">
-      <v-stepper-header>
-        <v-stepper-step :complete="stepnow > 1" step="1" editable>
-          Name of step 1
-        </v-stepper-step>
+        <v-stepper v-model="stepnow" flat style="background: transparent">
+          <v-stepper-header style="box-shadow:0 0 0;padding: 0 15px;">
+            <template v-for="(item, index) in stepper" >
+              <v-stepper-step  v-if="item" :key="item.key" :complete="stepnow > index+1" :step=index+1 editable>
+                {{item.title}}
+              </v-stepper-step>
+              <v-divider v-if="index < stepper.length-1" :key="item"></v-divider>
+            </template>
+          </v-stepper-header>
 
-        <v-divider></v-divider>
+          <v-stepper-items>
+            <v-stepper-content step="1">
+              <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
+                <!-- <v-hover v-slot="{ hover }"> -->
+                <v-tab v-for="item in resultsetbody" :key="item.tabname" class="resultset-tab"  active-class="resultset-tab-act" :ripple="false">
+                  <v-icon left>{{ item.icon }}</v-icon>{{item.tabname}}
+                </v-tab>
+                <!-- </v-hover> -->
+              </v-tabs>
+              
+              <v-tabs-items v-model="tabs" style="background: transparent;padding: 0 5px 20px 0px;">
+                
+                <v-tab-item>
+                  <v-card class="tab-property-card">
+                    <v-list-item class="tab-property-card-content">
+                      <v-list-item-content>
+                          
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-card>
+                </v-tab-item>
 
-        <v-stepper-step :complete="stepnow > 2" step="2" editable>
-          Name of step 2
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step :complete="stepnow > 3" step="3" editable>
-          Name of step 3
-        </v-stepper-step>
-      </v-stepper-header>
+                <v-tab-item>
+                  <v-card class="tab-card">
+                    <v-list-item class="tab-card-content">
+                      <v-list-item-content>
+                        <div class="tab-card-content-title">
+                          <v-icon left>mdi-menu</v-icon>SQL<v-spacer></v-spacer>
+                          <span style="float:right">
+                            <v-icon right>mdi-format-font-size-increase</v-icon>
+                            <v-icon right>mdi-database-check</v-icon>
+                            <v-icon right>mdi-magnify</v-icon>
+                          </span>
+                        </div>
+                        <v-divider></v-divider>
+                        <textarea class="tab-card-content-text" placeholder=""></textarea>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-card>
+                  <!-- <v-card class="tab-card tab-card-JsonEditor">
+                    <v-list-item class="tab-card-content">
+                      <v-list-item-content>
+                          <div class="tab-card-content-title">
+                            <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
+                            <span style="float:right">
+                              <v-icon right>mdi-format-font-size-increase</v-icon>
+                              <v-icon right>mdi-magnify</v-icon>
+                            </span>
+                          </div>
+                          <v-divider></v-divider>
+                          <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
+                            
+                            <template v-slot:item.calories="{ item }">
+                              <v-icon :color="getColor(item.calories)" dark>
+                                {{ item.calories }}
+                              </v-icon>
+                            </template> 
 
-      <v-stepper-items>
-        <v-stepper-content step="1">
-          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                          </v-data-table>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-card> -->
+                </v-tab-item>
+                <v-tab-item>
+                </v-tab-item>
+                <v-tab-item>
+                </v-tab-item>
+              </v-tabs-items>
+            </v-stepper-content>
+            <v-stepper-content step="2">
+              <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+            </v-stepper-content>
+            <v-stepper-content step="3">
+              <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+            </v-stepper-content>
+            <v-btn color="primary" v-if="stepnow < stepper.length" @click="stepnow += 1">Next</v-btn>
+              <v-btn text v-if="stepnow > 1" @click="stepnow -= 1">Prev</v-btn>
+              <v-btn :ripple="false" plain style="margin:0 20px">
+                <v-icon>mdi-content-save-outline</v-icon>SAVE
+              </v-btn>
+          </v-stepper-items>
+        </v-stepper>
 
-        </v-stepper-content>
-
-        <v-stepper-content step="2">
-          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
-        </v-stepper-content>
-        <v-stepper-content step="3">
-          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
-        </v-stepper-content>
-
-      
-        <v-btn color="primary" @click="stepnow += 1">
-            Next
-          </v-btn>
-
-          <v-btn text v-if="stepnow > 1" @click="stepnow -= 1">
-            Prev
-          </v-btn>
-      </v-stepper-items>
-    </v-stepper>
-
-
-
-
-        <template v-if="navtemplate == 'Property'">
-          <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
-            <!-- <v-hover v-slot="{ hover }"> -->
-            <v-tab v-for="item in resultsetbody" :key="item.tabname" class="resultset-tab"  active-class="resultset-tab-act" :ripple="false">
-              <v-icon>{{ item.icon }}</v-icon>{{item.tabname}}
-            </v-tab>
-            <v-btn icon :ripple="false" plain style="margin:0 20px">
-              <v-icon>mdi-content-save-outline</v-icon>
-            </v-btn>
-            <!-- </v-hover> -->
-          </v-tabs>
-          
-          <v-tabs-items v-model="tabs" style="background: transparent;padding: 0 5px 20px 5px;">
-            
-            <v-tab-item>
-              <v-card class="tab-property-card">
-                <v-list-item class="tab-property-card-content">
-                  <v-list-item-content>
-                      
-                  </v-list-item-content>
-                </v-list-item>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card class="tab-card">
-                <v-list-item class="tab-card-content">
-                  <v-list-item-content>
-                    <div class="tab-card-content-title">
-                      <v-icon left>mdi-menu</v-icon>SQL<v-spacer></v-spacer>
-                      <span style="float:right">
-                        <v-icon right>mdi-format-font-size-increase</v-icon>
-                        <v-icon right>mdi-database-check</v-icon>
-                        <v-icon right>mdi-magnify</v-icon>
-                      </span>
-                    </div>
-                    <v-divider></v-divider>
-                    <textarea class="tab-card-content-text" placeholder=""></textarea>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-card>
-              <v-card class="tab-card tab-card-JsonEditor">
-                <v-list-item class="tab-card-content">
-                  <v-list-item-content>
-                      <div class="tab-card-content-title">
-                        <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
-                        <span style="float:right">
-                          <v-icon right>mdi-format-font-size-increase</v-icon>
-                          <v-icon right>mdi-magnify</v-icon>
-                        </span>
-                      </div>
-                      <v-divider></v-divider>
-                      <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
-                        <!-- <template v-slot:item.calories="{ item }">
-                          <v-icon :color="getColor(item.calories)" dark>
-                            {{ item.calories }}
-                          </v-icon>
-                        </template> -->
-                      </v-data-table>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-card>
-            </v-tab-item>
-          
-            <v-tab-item>
-            </v-tab-item>
-
-            <v-tab-item>
-            </v-tab-item>
-          </v-tabs-items>
-        </template>
-
-        <template v-if="navtemplate == 'Browse'">
-        </template>
       </v-col>
 
     </div>
@@ -202,7 +174,14 @@
       componentchecked:[],
       resultsetmenuindex:0,
       stepnow:1,
-      resultsetbody:[{tabname:'Property',icon:'mdi-cog'},{tabname:'SQL',icon:'mdi-database'},{tabname:'DATAMODEL',icon:'mdi-database'}],
+      stepper:[
+        {"key":"property","title":"Property"},
+        {"key":"sqlResult","title":"Sql Result"},
+        {"key":"xlsEditor","title":"XLS Editor"},
+        {"key":"finalResult","title":"Final Result"},
+        {"key":"report","title":"Report"}
+      ],
+      resultsetbody:[{tabname:'Property',icon:'mdi-cog'},{tabname:'SQL',icon:'mdi-database'},{tabname:'Ask',icon:'mdi-table-key'}],
       navtemplate:'Property',
       JsonEditorHeaders: [
         {
@@ -355,6 +334,7 @@
   border-radius: 12px;
   border: 0px;
   background: #fff;
+  box-shadow: 0px 3px 18px rgba(230,230,230,.8);
 }
 #resultset-component-navlist .v-list-item{
     /* padding-right: 8px; */
@@ -376,11 +356,17 @@
   color: #757575;
 }
 #resultset-component-navlist .v-input--checkbox{
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
 }
 .component-checkbox{
   white-space: nowrap;
+}
+.component-checkbox .v-input--selection-controls__input{
+  margin-right: 4px;
+  position: sticky;
+  left: 0;
+  background: #fff;
 }
 .component-download-icon {
   float: right;
@@ -412,14 +398,15 @@
 
 
 .resultset-tabs .v-slide-group__content {
-    justify-content: end;
+    /* justify-content: end; */
+    /* margin-left: 20px; */
     align-items: center;
 }
 .resultset-tab {
     /* color: #000!important; */
     background: transparent;
     margin: 0 0px!important;
-    padding: 12px 15px;
+    padding: 12px 20px;
     z-index: 1;
     font-size: 14px;
     position: relative;
@@ -471,12 +458,27 @@
   min-height: 20vh;
   box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
   background: #fff!important;
+  border-radius: 0 12px 12px 12px!important;
+}
+.withouttab-property-card{
+  font-size: 16px;
+  min-height: 20vh;
+  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
+  background: #fff!important;
   border-radius: 12px!important;
 }
 .tab-property-card-content{
   padding: 0;
 }
 .tab-card{
+  font-size: 16px;
+  min-height: 20vh;
+  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
+  background: #fff!important;
+  border-radius: 0 12px 12px 12px!important;
+  margin-bottom: 15px;
+}
+.withouttab-card{
   font-size: 16px;
   min-height: 20vh;
   box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
