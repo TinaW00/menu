@@ -58,7 +58,7 @@
               <v-stepper-step  v-if="item" :key="item.key" :complete="stepnow > index+1" :step=index+1 editable>
                 {{item.title}}
               </v-stepper-step>
-              <v-divider v-if="index < stepper.length-1" :key="item"></v-divider>
+              <v-divider v-if="index < stepper.length-1" :key="index"></v-divider>
             </template>
           </v-stepper-header>
 
@@ -165,7 +165,6 @@
           title:[
             {item:'Monthly Profit and Loss'},
             {item:'Profit and Loss by Division'},
-            {item:'Yearly Profit and Loss'},
             {item:'Yearly Profit and Loss'},
    
           ]
