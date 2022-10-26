@@ -1,89 +1,151 @@
 <template>
     <div>
-        <div v-if="step.key == 'property'">{{step.key}}
-            <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
-                <!-- <v-hover v-slot="{ hover }"> -->
-                <v-tab v-for="item in PropertyTabs" :key="item.tabname" class="resultset-tab"  active-class="resultset-tab-act" :ripple="false">
-                    <v-icon left>{{ item.icon }}</v-icon>{{item.tabname}}
-                </v-tab>
-                <!-- </v-hover> -->
-            </v-tabs>
-            <v-tabs-items v-model="tabs" style="background: transparent;padding: 0 5px 20px 0px;">
-                <v-tab-item>
-                    <v-card class="tab-property-card">
-                        <v-list-item class="tab-property-card-content">
-                            <v-list-item-content>
-                                <div class="tab-card-content-title">
-                                    <!-- <v-icon left>mdi-menu</v-icon> -->
-                                    Property<v-spacer></v-spacer>
-                                    <span style="float:right">
-                                    <v-icon right>mdi-format-font-size-increase</v-icon>
-                                    </span>
-                                </div>
-                                <v-divider></v-divider>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                </v-tab-item>
-                <v-tab-item>
-                    <v-card class="tab-card">
+        <div v-if="step.key == 'property'">
+            <v-row>
+                <v-col cols="10"></v-col>
+                <v-col cols="2" style="margin-bottom:20px">
+                    <div style="z-index: 99;float: right;">
+                        <v-radio-group v-model="viewradio" mandatory row hide-details style="margin:0" :ripple="false"  class="view-radio-div">
+                            <v-radio value="view-separate" off-icon="mdi-view-sequential" on-icon="mdi-view-sequential"></v-radio>
+                            <v-radio value="view-tabs" off-icon="mdi-tab" on-icon="mdi-tab"></v-radio>
+                        </v-radio-group>
+                    </div>
+                </v-col>
+            </v-row>
+            <template v-if="viewradio == 'view-tabs'">
+                <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
+                    <!-- <v-hover v-slot="{ hover }"> -->
+                    <v-tab v-for="item in PropertyTabs" :key="item.tabname" class="resultset-tab"  active-class="resultset-tab-act" :ripple="false">
+                        <v-icon left>{{ item.icon }}</v-icon>{{item.tabname}}
+                    </v-tab>
+                    <!-- </v-hover> -->
+                </v-tabs>
+                <v-tabs-items v-model="tabs" style="background: transparent;padding: 0 5px 20px 0px;">
+                    <v-tab-item>
+                        <v-card class="tab-property-card">
+                            <v-list-item class="tab-property-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        Property<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card class="tab-card">
+                            <v-list-item class="tab-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        SQL<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        <!-- <v-icon right>mdi-database-check</v-icon>
+                                        <v-icon right>mdi-magnify</v-icon> -->
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                    <textarea class="tab-card-content-text" placeholder=""></textarea>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                        <!-- <v-card class="tab-card tab-card-JsonEditor">
                         <v-list-item class="tab-card-content">
                             <v-list-item-content>
                                 <div class="tab-card-content-title">
-                                    <!-- <v-icon left>mdi-menu</v-icon> -->
-                                    SQL<v-spacer></v-spacer>
-                                    <span style="float:right">
+                                <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
+                                <span style="float:right">
                                     <v-icon right>mdi-format-font-size-increase</v-icon>
-                                    <!-- <v-icon right>mdi-database-check</v-icon>
-                                    <v-icon right>mdi-magnify</v-icon> -->
-                                    </span>
+                                    <v-icon right>mdi-magnify</v-icon>
+                                </span>
                                 </div>
                                 <v-divider></v-divider>
-                                <textarea class="tab-card-content-text" placeholder=""></textarea>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <!-- <v-card class="tab-card tab-card-JsonEditor">
-                    <v-list-item class="tab-card-content">
-                        <v-list-item-content>
-                            <div class="tab-card-content-title">
-                            <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
-                            <span style="float:right">
-                                <v-icon right>mdi-format-font-size-increase</v-icon>
-                                <v-icon right>mdi-magnify</v-icon>
-                            </span>
-                            </div>
-                            <v-divider></v-divider>
-                            <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
-                            
-                            <template v-slot:item.calories="{ item }">
-                                <v-icon :color="getColor(item.calories)" dark>
-                                {{ item.calories }}
-                                </v-icon>
-                            </template> 
+                                <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
+                                
+                                <template v-slot:item.calories="{ item }">
+                                    <v-icon :color="getColor(item.calories)" dark>
+                                    {{ item.calories }}
+                                    </v-icon>
+                                </template> 
 
-                            </v-data-table>
-                        </v-list-item-content>
-                    </v-list-item>
-                    </v-card> -->
-                </v-tab-item>
-                <v-tab-item>
-                    <v-card class="tab-property-card">
-                        <v-list-item class="tab-property-card-content">
-                            <v-list-item-content>
-                                <div class="tab-card-content-title">
-                                    <!-- <v-icon left>mdi-menu</v-icon> -->
-                                    Ask<v-spacer></v-spacer>
-                                    <span style="float:right">
-                                    <v-icon right>mdi-format-font-size-increase</v-icon>
-                                    </span>
-                                </div>
-                                <v-divider></v-divider>
+                                </v-data-table>
                             </v-list-item-content>
                         </v-list-item>
-                    </v-card>
-                </v-tab-item>
-            </v-tabs-items>
+                        </v-card> -->
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card class="tab-property-card">
+                            <v-list-item class="tab-property-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        Ask<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs-items>
+            </template>
+            <template v-if="viewradio == 'view-separate'">
+                
+                        <v-card class="withouttab-property-card">
+                            <v-list-item class="tab-property-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        Property<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                   
+                        <v-card class="withouttab-card">
+                            <v-list-item class="tab-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        SQL<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        <!-- <v-icon right>mdi-database-check</v-icon>
+                                        <v-icon right>mdi-magnify</v-icon> -->
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                    <textarea class="tab-card-content-text" placeholder=""></textarea>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                        <v-card class="tab-property-card">
+                            <v-list-item class="tab-property-card-content">
+                                <v-list-item-content>
+                                    <div class="tab-card-content-title">
+                                        <!-- <v-icon left>mdi-menu</v-icon> -->
+                                        Ask<v-spacer></v-spacer>
+                                        <span style="float:right">
+                                        <v-icon right>mdi-format-font-size-increase</v-icon>
+                                        </span>
+                                    </div>
+                                    <v-divider></v-divider>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+            </template>
         </div>
         <div v-if="step.key == 'sqlResult'">{{step.key}}
             <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
@@ -137,6 +199,7 @@
  export default {
     props :['step'],
     data: () => ({
+      viewradio:'view-separate',
       tabs: 0,
       stepnow:1,
       PropertyTabs:[{tabname:'Property',icon:'mdi-cog'},{tabname:'SQL',icon:'mdi-database'},{tabname:'Ask',icon:'mdi-table-key'}],
@@ -219,6 +282,7 @@
   box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
   background: #fff!important;
   border-radius: 0 12px 12px 12px!important;
+  margin-bottom: 15px;
 }
 .withouttab-property-card{
   font-size: 16px;
@@ -226,6 +290,7 @@
   box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
   background: #fff!important;
   border-radius: 12px!important;
+  margin-bottom: 15px;
 }
 .tab-property-card-content{
   padding: 0;
@@ -272,14 +337,20 @@
   outline: none;
   min-height: calc(20vh - 40px);
 }
-.tab-property-card .v-list-item, .tab-card .v-list-item{
+.tab-property-card .v-list-item, .tab-card .v-list-item, .withouttab-property-card .v-list-item, .withouttab-card .v-list-item{
   min-height: auto;
 }
-.tab-property-card .v-list-item__content, .tab-card .v-list-item__content{
+.tab-property-card .v-list-item__content, .tab-card .v-list-item__content, .withouttab-property-card .v-list-item__content, .withouttab-card .v-list-item__content{
   padding: 0px!important;
   margin: 0;
 }
-.tab-property-card .v-list-item__content > *:not(:last-child), .tab-card .v-list-item__content > *:not(:last-child){
+.tab-property-card .v-list-item__content > *:not(:last-child), .tab-card .v-list-item__content > *:not(:last-child), .withouttab-property-card .v-list-item__content > *:not(:last-child), .withouttab-card .v-list-item__content > *:not(:last-child){
   margin: 0;
+}
+.viewbtn{
+    color: #000;
+}
+.view-radio-div .v-input--selection-controls__input:hover .v-input--selection-controls__ripple:before{
+    background: transparent!important;
 }
 </style>

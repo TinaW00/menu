@@ -16,7 +16,7 @@
         <v-img src="http://210.3.65.166/pgsfm3k/template/swivel2.png" max-height="60" max-width="120" contain></v-img>        <!-- LOGO  -->
         <v-spacer></v-spacer>
 
-    <v-row style="display:flex;justify-content: space-around;">
+    <v-row style="display:flex;justify-content: space-around;flex-wrap: nowrap;" id="top-select">
         <v-col cols="auto">      <!-- tenants  -->
           <div id="select" class="tenantstitleAct">
             <v-select class="selectinput" :items="tenants" item-text="tenant" item-value="tenant" flat hide-details label="Tenant" append-icon="mdi-chevron-down" color="#000" dense :menu-props="{ bottom: true, offsetY: true, maxHeight: 'auto' }">
@@ -412,6 +412,7 @@ import pmenu from "./menu.json";
 *{
   font-family: 'inter';
 }
+
 .v-main__wrap{
   background:#f5f5f5;
 }
@@ -638,5 +639,10 @@ import pmenu from "./menu.json";
 .act-badg-num .v-badge__badge{
   background : #849fb7!important;
   color: #fff!important;
+}
+@media (max-width:1065px) {
+  #top-select{
+    display: none!important;
+  }
 }
 </style>

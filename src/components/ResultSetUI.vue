@@ -228,11 +228,11 @@ import StepDetail from './StepDetail.vue';
   /* color: #FF9800; */
   color: #000;
 }
-#resultset-submenu{
+/* #resultset-submenu{
   max-height:32%;
   min-height: fit-content;
   padding: 12px 12px 12px 0;
-  /* background:green; */
+  background:green;
 }
 #resultset-submenu-navlist{
   border-radius: 12px;
@@ -266,7 +266,7 @@ import StepDetail from './StepDetail.vue';
 }
 .resultset-menu-nav-act .navicon{
   color: #000!important;
-}
+} */
 
 #resultset-component{
   max-height:60%;
