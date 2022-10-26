@@ -154,7 +154,7 @@
 
         <v-tabs vertical v-model="MenuTabIndex" hide-slider class="menu-tabs"  active-class="menu-act-tabs">
           <v-tab style="display:none"></v-tab>
-          <v-tab v-for="(item, index) in block" :key="index" @click="tabcount(index)" :ripple="false" class="menu-tab" >
+          <v-tab v-for="(item, index) in block" :key="index" @click="tabcount(index)" :ripple="false" class="menu-tab" active-class="menu-act-tab">
             <v-icon>{{item.icon}}</v-icon>
           </v-tab>
          
@@ -186,7 +186,7 @@
           </v-tab-item>
         </v-tabs>
       </v-navigation-drawer>
-
+      <ResultSetUI/>
   </div>
   
 </template>
@@ -231,13 +231,18 @@
 -->
 
 <script>
+import ResultSetUI from './ResultSetUI';
 import pmenu from "./menu.json";
   export default {
+    components: {
+    ResultSetUI,
+  },
     data: () => ({
       expand: false,
       expandone: -1,
       expandtab:[],
-      MenuTabIndex: 1,
+      // MenuTabIndex: 1,
+      MenuTabIndex: 0,
       tabseries: 0,
       develop:{text:'Develop',value:'Develop'},
       dashboard:[
@@ -252,7 +257,8 @@ import pmenu from "./menu.json";
         {icon:'',title:'Band',link:''},
         {icon:'',title:'Movie',link:''},
       ],
-      drawer: false,
+      // drawer: false,
+      drawer: true,
       mini: true,
       miniopen: false,
 
@@ -416,7 +422,8 @@ import pmenu from "./menu.json";
 .nav-drawer{
   background: var(--Menu-bg)!important;
   padding-left: 5px;
-  min-width: 61px!important;
+  /* min-width: 61px!important; */
+  min-width: 52px!important;
 }
 .menu-tabs{
 	z-index:99;
@@ -436,6 +443,9 @@ import pmenu from "./menu.json";
   border-radius: var(--Menu-Tab-border-radius);
   background: var(--Menu-Tab-bg);
   margin: 5px 0;
+}
+.menu-act-tab{
+  background: #ADC9D2;
 }
 .menu-tab > .v-icon{
   font-size: var(--Menu-Tab-font-size);

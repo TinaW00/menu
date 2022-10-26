@@ -2,8 +2,9 @@
   <v-app>
     
     <v-main>
-      <!-- <HelloWorld/> -->
-      <HintComponent/>
+      <HelloWorld/>
+      <!-- <HintComponent/> -->
+      <!-- <ResultSetUI/> -->
     </v-main>
 
    
@@ -11,16 +12,18 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
-import HintComponent from './components/HintComponent';
+import HelloWorld from './components/HelloWorld';
+// import HintComponent from './components/HintComponent';
+// import ResultSetUI from './components/ResultSetUI';
 
 
 export default {
   name: 'App',
 
   components: {
-    // HelloWorld,
-    HintComponent,
+    HelloWorld,
+    // HintComponent,
+    // ResultSetUI,
   },
 
   data: () => ({
