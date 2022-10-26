@@ -53,95 +53,38 @@
       <v-col cols="10">
 
         <v-stepper v-model="stepnow" flat style="background: transparent">
-          <v-stepper-header style="box-shadow:0 0 0;padding: 0 15px;">
+          <v-stepper-header  class="stepper-header" style="box-shadow:0 0 0;padding: 0 15px;">
             <template v-for="(item, index) in stepper" >
-              <v-stepper-step  v-if="item" :key="item.key" :complete="stepnow > index+1" :step=index+1 editable>
+              <v-stepper-step  v-if="item" :key="item.key" :complete="stepnow > index+1" :step=index+1 editable color="#ADC9D2">
                 {{item.title}}
               </v-stepper-step>
               <v-divider v-if="index < stepper.length-1" :key="index"></v-divider>
             </template>
           </v-stepper-header>
 
-          <v-stepper-items>
+          <v-stepper-items class="stepper-items">
             <v-stepper-content step="1">
-              <v-tabs v-model="tabs" class="resultset-tabs" hide-slider background-color="transparent">
-                <!-- <v-hover v-slot="{ hover }"> -->
-                <v-tab v-for="item in resultsetbody" :key="item.tabname" class="resultset-tab"  active-class="resultset-tab-act" :ripple="false">
-                  <v-icon left>{{ item.icon }}</v-icon>{{item.tabname}}
-                </v-tab>
-                <!-- </v-hover> -->
-              </v-tabs>
-              
-              <v-tabs-items v-model="tabs" style="background: transparent;padding: 0 5px 20px 0px;">
-                
-                <v-tab-item>
-                  <v-card class="tab-property-card">
-                    <v-list-item class="tab-property-card-content">
-                      <v-list-item-content>
-                          
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-card>
-                </v-tab-item>
-
-                <v-tab-item>
-                  <v-card class="tab-card">
-                    <v-list-item class="tab-card-content">
-                      <v-list-item-content>
-                        <div class="tab-card-content-title">
-                          <v-icon left>mdi-menu</v-icon>SQL<v-spacer></v-spacer>
-                          <span style="float:right">
-                            <v-icon right>mdi-format-font-size-increase</v-icon>
-                            <v-icon right>mdi-database-check</v-icon>
-                            <v-icon right>mdi-magnify</v-icon>
-                          </span>
-                        </div>
-                        <v-divider></v-divider>
-                        <textarea class="tab-card-content-text" placeholder=""></textarea>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-card>
-                  <!-- <v-card class="tab-card tab-card-JsonEditor">
-                    <v-list-item class="tab-card-content">
-                      <v-list-item-content>
-                          <div class="tab-card-content-title">
-                            <v-icon left>mdi-menu</v-icon>Ask<v-spacer></v-spacer>
-                            <span style="float:right">
-                              <v-icon right>mdi-format-font-size-increase</v-icon>
-                              <v-icon right>mdi-magnify</v-icon>
-                            </span>
-                          </div>
-                          <v-divider></v-divider>
-                          <v-data-table :headers="JsonEditorHeaders" :items="JsonEditorItem" item-key="name" :items-per-page="5">
-                            
-                            <template v-slot:item.calories="{ item }">
-                              <v-icon :color="getColor(item.calories)" dark>
-                                {{ item.calories }}
-                              </v-icon>
-                            </template> 
-
-                          </v-data-table>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-card> -->
-                </v-tab-item>
-                <v-tab-item>
-                </v-tab-item>
-                <v-tab-item>
-                </v-tab-item>
-              </v-tabs-items>
+              <StepDetail :step="stepper[0]"/>
             </v-stepper-content>
             <v-stepper-content step="2">
-              <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+                <StepDetail :step="stepper[1]"/>
             </v-stepper-content>
             <v-stepper-content step="3">
-              <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+              <StepDetail :step="stepper[2]"/>
             </v-stepper-content>
-            <v-btn color="primary" v-if="stepnow < stepper.length" @click="stepnow += 1">Next</v-btn>
-              <v-btn text v-if="stepnow > 1" @click="stepnow -= 1">Prev</v-btn>
-              <v-btn :ripple="false" plain style="margin:0 20px">
-                <v-icon>mdi-content-save-outline</v-icon>SAVE
+            <v-stepper-content step="4">
+              <StepDetail :step="stepper[3]"/>
+            </v-stepper-content>
+            <v-stepper-content step="5">
+              <StepDetail :step="stepper[4]"/>
+            </v-stepper-content>
+            <div id="stepper-footer">
+              <v-btn :ripple="false" plain class="stepper-saved">
+                <v-icon style="margin-right:5px">mdi-content-save-outline</v-icon>SAVE
               </v-btn>
+              <v-btn color="#D6E2E6" v-if="stepnow < stepper.length" @click="stepnow += 1" depressed class="stepper-btn" style="font-weight:600">Next</v-btn>
+              <v-btn v-if="stepnow > 1" @click="stepnow -= 1" depressed style="background: #eee;margin-left: 5px;" class="stepper-btn">Prev</v-btn>
+            </div>  
           </v-stepper-items>
         </v-stepper>
 
@@ -154,7 +97,9 @@
 
 
 <script>
+import StepDetail from './StepDetail.vue';
   export default {
+  components: { StepDetail },
     data: () => ({
       tabs: 1,
       resultsetmenu:[{navname:'Property',icon:'mdi-cog',link:'https://github.com/vuetifyjs/vuetify'},{navname:'Browse',icon:'mdi-table-large',link:'https://github.com/vuetifyjs/vuetify'}],
@@ -394,132 +339,24 @@
     border: var(--STScrollBar-border);
 }
 
-
-
-.resultset-tabs .v-slide-group__content {
-    /* justify-content: end; */
-    /* margin-left: 20px; */
-    align-items: center;
+.stepper-header{
+  height: 60px!important;
 }
-.resultset-tab {
-    /* color: #000!important; */
-    background: transparent;
-    margin: 0 0px!important;
-    padding: 12px 20px;
-    z-index: 1;
-    font-size: 14px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-weight: medium;
+.stepper-items{
+  height: calc(100vh - 12px - 60px - 50px - 45px);
 }
-.resultset-tab:before {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background: #ebebeb!important;
-    border-radius: 1.5em 1.5em 0 0;
-    transform: scale(1.08) perspective(1.8em) rotateX(4deg);
-    transform-origin: bottom;
-    transition: .2scubic-bezier(.4,0,.6,1);
-    opacity: 1;
-    height: 55px;
-}
-.resultset-tab-act{
-  z-index: 2;
-  color: #000!important;
-}
-.resultset-tab-act:before{
-  content: "";
+#stepper-footer{
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  background: #fff!important;
-  z-index: -1;
-  opacity:1!important;
+  bottom: 5px;
 }
-.theme--light.v-tabs .v-tab:hover::before {
-    /* opacity: 0.6;
-    background: #fff!important; */
+.stepper-saved{
+  margin:0 20px;
+  /* background: #eaeaea; */
+  border-radius: 4px;
 }
-.resultset-tabs .resultset-tab:hover::before {
-    opacity: 0.6!important;
-    background: #fff!important;
-}
+.stepper-btn{
+  padding: 0 50px!important;
 
-.tab-property-card{
-  font-size: 16px;
-  min-height: 20vh;
-  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
-  background: #fff!important;
-  border-radius: 0 12px 12px 12px!important;
-}
-.withouttab-property-card{
-  font-size: 16px;
-  min-height: 20vh;
-  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
-  background: #fff!important;
-  border-radius: 12px!important;
-}
-.tab-property-card-content{
-  padding: 0;
-}
-.tab-card{
-  font-size: 16px;
-  min-height: 20vh;
-  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
-  background: #fff!important;
-  border-radius: 0 12px 12px 12px!important;
-  margin-bottom: 15px;
-}
-.withouttab-card{
-  font-size: 16px;
-  min-height: 20vh;
-  box-shadow: 0px 3px 18px rgba(68,67,67,.05)!important;
-  background: #fff!important;
-  border-radius: 12px!important;
-  margin-bottom: 15px;
-}
-.tab-card-JsonEditor{
-  min-height: fit-content;
-}
-.tab-card-content{
-  padding: 0;
-}
-.tab-property-card-content .v-icon{
-  color:#A0B2B6;
-}
-.tab-card-content-title{
-  font-size: 20px;
-  padding: 5px 20px;
-  margin-bottom: 0;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-}
-.tab-card-content-title .v-icon{
-  color: #A0B2B6;
-  font-weight: 400;
-}
-.tab-card-content-text{
-  padding: 8px;
-  outline: none;
-  min-height: calc(20vh - 40px);
-}
-.tab-card .v-list-item{
-  min-height: auto;
-}
-.tab-card .v-list-item__content{
-  padding: 0px!important;
-  margin: 0;
-}
-.tab-card .v-list-item__content > *:not(:last-child){
-  margin: 0;
 }
 
 </style>
