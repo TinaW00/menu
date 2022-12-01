@@ -8,6 +8,8 @@
                         <v-radio-group v-model="viewradio" mandatory row hide-details style="margin:0" :ripple="false"  class="view-radio-div">
                             <v-radio value="view-separate" off-icon="mdi-view-sequential" on-icon="mdi-view-sequential"></v-radio>
                             <v-radio value="view-tabs" off-icon="mdi-tab" on-icon="mdi-tab"></v-radio>
+                            <v-radio value="view-tabs" off-icon="$Row" on-icon="$Row" :color="'var()'"></v-radio>
+                            <!-- <v-icon color="yellow">$Row</v-icon> -->
                         </v-radio-group>
                     </div>
                 </v-col>

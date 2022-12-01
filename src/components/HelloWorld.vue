@@ -160,7 +160,7 @@
          
          <v-tab-item></v-tab-item>
           <v-tab-item v-for="item in block" :key="item.module" class="menu-tab-item" transition=" ">
-            <v-list dense nav>
+            <v-list dense nav shaped>
               <v-list-item>
                 <header class="menu-tab-item-header">
                   {{ item.module }}
@@ -168,7 +168,7 @@
                 </header>
               </v-list-item>
               <div id="menu-tab-item-scrollbar">
-                <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon=" expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action :color="`var(--Menu-ListItem-GroupHeader-HoverAct-color)`" class="menu-tab-item-list-group" style="padding-left:0px!important;">
+                <v-list-group sub-group v-for="(subitem, index) in item.submodule" :key="index" @click="changeicon(index)" :append-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" :prepend-icon="expandtab.includes((index + tabseries)) ? 'mdi-minus' : 'mdi-plus'" no-action :color="`var(--Menu-ListItem-GroupHeader-HoverAct-color)`" class="menu-tab-item-list-group" style="padding-left:0px!important;">
                   <template v-slot:activator>
                     <v-list-item-content>
                       <v-list-item-title>{{ subitem.title }}</v-list-item-title>
@@ -186,7 +186,8 @@
           </v-tab-item>
         </v-tabs>
       </v-navigation-drawer>
-      <ResultSetUI/>
+      <!-- <ResultSetUI/> -->
+      <MenuJson/>
   </div>
   
 </template>
@@ -231,11 +232,13 @@
 -->
 
 <script>
-import ResultSetUI from './ResultSetUI';
+// import ResultSetUI from './ResultSetUI';
+import MenuJson from './MenuJson';
 import pmenu from "./menu.json";
   export default {
     components: {
-    ResultSetUI,
+    // ResultSetUI,
+    MenuJson
   },
     data: () => ({
       expand: false,
@@ -498,6 +501,20 @@ import pmenu from "./menu.json";
   width: -moz-available;
   width: fill-available;
   margin-left: 5px;
+  position: relative;
+}
+.menu-tab-item::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background-image: url('https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg')!important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 .menu-tab-item-header{
 	font-weight:600;
@@ -530,13 +547,11 @@ import pmenu from "./menu.json";
     background-color: var(--Menu-ListItem-ScrollBar-color);
     border-radius: var(--Menu-ListItem-ScrollBar-border-radius);
     background-clip: content-box;
-    border: var(--STScrollBar-thumb-border);
 }
 #menu-tab-item-scrollbar::-webkit-scrollbar-track {
     background-color: var(--Menu-ListItem-ScrollBar-bg);
     border-radius: var(--STScrollBar-thumb-border);
     display: block;
-    border: var(--STScrollBar-border);
 }
 #menu-tab-item-scrollbar .v-list-group__header  {
     padding-left: 0px!important;
