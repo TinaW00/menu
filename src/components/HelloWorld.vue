@@ -154,7 +154,7 @@
 
         <v-tabs vertical v-model="MenuTabIndex" hide-slider class="menu-tabs"  active-class="menu-act-tabs">
           <v-tab style="display:none"></v-tab>
-          <v-tab v-for="(item, index) in block" :key="index" @click="tabcount(index)" :ripple="false" class="menu-tab" active-class="menu-act-tab">
+          <v-tab v-for="(item, index) in block" :key="index" @click="tabcount(index)" :ripple="false" class="menu-tab" active-class="menu-act-tab" :style="{ '--lighten': (lighten-index*10)+ '%' }">
             <v-icon>{{item.icon}}</v-icon>
           </v-tab>
          
@@ -241,6 +241,7 @@ import pmenu from "./menu.json";
     MenuJson
   },
     data: () => ({
+      lighten: 0,
       expand: false,
       expandone: -1,
       expandtab:[],
@@ -379,13 +380,26 @@ import pmenu from "./menu.json";
       option2(){
         this.option = 2
         return this.option
+      },
+      gethsl(){
+        let colorcode = getComputedStyle(document.documentElement).getPropertyValue('--hsl');
+        console.log("the color it received: ",colorcode);
+        const hsloriginal = colorcode;
+        const getlighten = /\d+/g;
+        const hslarr = hsloriginal.match(getlighten);
+        console.log("the lighten value of the color: ",hslarr[2]);
+        this.lighten = parseInt(hslarr[2], 10);
+        
       }
+    },
+    mounted(){
+      this.gethsl()
     }
   }
 </script>
-
-<style>
+<style lang="scss">
 :root{
+  --hsl : hsl(195,29%,75%);
   --Menu-bg : #fff;
   --Menu-Tabs-border: 4px solid;
   --Menu-Tabs-border-color : #A0B2B6;
@@ -445,7 +459,7 @@ import pmenu from "./menu.json";
   max-height: var(--Menu-Tab-width-height);
 	padding: 0px 0px;
   border-radius: var(--Menu-Tab-border-radius);
-  background: var(--Menu-Tab-bg);
+  background: hsl(195,29%,var(--lighten));
   margin: 5px 0;
 }
 .menu-act-tab{
